@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class WarSim
 {
     // instance variables - replace the example below with your own
-    private static int ARMY_HUM_ELF_NUM = 300;
-    private static int ARMY_DEMON_NUM = 100;
+    private static int ARMY_HUM_ELF_NUM = 250;
+    private static int ARMY_DEMON_NUM = 175;
     
     public static void main() {
         
@@ -34,26 +34,19 @@ public class WarSim
         
         for(int count = 0; count < ARMY_DEMON_NUM; count++) {
             
-            int whatDemon = Randomizer.nextInt(10);
+            int whatDemon = Randomizer.nextInt(100);
             
-            switch(whatDemon) {
+            if (whatDemon == 0) {
                 
-                case 0:
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                case 6:
-                case 7:
-                    armyDemon.add(new Demon());
-                    break;
-                case 8:
-                    armyDemon.add(new CyberDemon());
-                    break;
-                case 9:
-                    armyDemon.add(new Balrog());
-                    break;
+                armyDemon.add(new Balrog());
+            }
+            else if (whatDemon > 0 && whatDemon <= 10) {
+                
+                armyDemon.add(new CyberDemon());
+            }
+            else {
+                
+                armyDemon.add(new Demon());
             }
         }
         
@@ -126,7 +119,5 @@ public class WarSim
             System.out.println("The demon horde ravages the land with a surviving army size of " +
                                 armyDemon.size() + ".");
         }
-        
-        System.exit(0);
     }
 }
