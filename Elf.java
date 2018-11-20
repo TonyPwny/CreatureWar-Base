@@ -9,58 +9,29 @@ import java.util.Random;
 public class Elf extends Creature
 {
     // instance variables - replace the example below with your own
+    private static final int MIN_HP = 8;
+    private static final int MAX_HP = 25;
+    private static final int MIN_STR = 5;
+    private static final int MAX_STR = 18;
 
     /**
      * Constructor for objects of class Elf
      */
     public Elf() {
         // initialise instance variables
-        setHP(8);
-        setStr(5);
-    }
-
-    public Elf(int hp, int str) {
-
-        setHP(hp);
-        setStr(str);
-    }
-    
-    protected void setHP(int hp) {
-        
-        if (hp < 8) {
-            super.setHP(8);
-        }
-        else if (hp > 25) {
-            super.setHP(25);
-        }
-        else {
-            super.setHP(hp);
-        }
-    }
-    
-    protected void setStr(int str) {
-        
-        if (str < 5) {
-            super.setStr(5);
-        }
-        else if (str > 18) {
-            super.setStr(18);
-        }
-        else {
-            super.setStr(str);
-        }
+        super(Randomizer.nextInt(MAX_HP - MIN_HP) + MIN_HP,
+                Randomizer.nextInt(MAX_STR - MIN_STR) + MIN_STR);
     }
     
     public int damage() {
         
-        Random rand = new Random();
-        int critical = rand.nextInt(10);
+        int critical = Randomizer.nextInt(10);
         
-        if (critical != 0) {
-            return super.damage();
+        if (critical == 0) {
+            return super.damage() * 2;
         }
         else {
-            return super.damage() * 2;
+            return super.damage();
         }
     }
 }

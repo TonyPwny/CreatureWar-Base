@@ -1,4 +1,3 @@
-import java.util.Random;
 
 /**
  * Write a description of class Creature here.
@@ -6,47 +5,44 @@ import java.util.Random;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Creature
-{
-    private int hp;
-    private int str;
+public abstract class Creature {
+    private int hp, str;
+    private static final int MIN_HP = 5;
+    private static final int MIN_STR = 5;
+    private static final int DEFAULT_HP = 10;
+    private static final int DEFAULT_STR = 10;
+    
    
     public Creature() {
         
-        hp = 10;
-        str = 10;
+        hp = DEFAULT_HP;
+        str = DEFAULT_STR;
     }
     
     public Creature(int hp, int str) {
         
-        setHP(hp);
-        setStr(str);
-    }
-        
-    public int damage() {
-        
-        Random rand = new Random();
-        return rand.nextInt(str) + 1;
-    }
-    
-    protected void setHP(int hp) {
-        
-        if (hp < 5) {
-            this.hp = 5;
+        if (hp < MIN_HP) {
+            this.hp = MIN_HP;
         }
         else {
             this.hp = hp;
         }
-    }
-    
-    protected void setStr(int str) {
-        
-        if (str < 5) {
-            this.str = 5;
+        if (str < MIN_STR) {
+            this.str = MIN_STR;
         }
         else {
             this.str = str;
         }
+    }
+        
+    public int damage() {
+        
+        return Randomizer.nextInt(str) + 1;
+    }
+    
+    public void takeDamage(int damage) {
+        
+        hp -= damage;
     }
     
     public boolean isAlive() {
