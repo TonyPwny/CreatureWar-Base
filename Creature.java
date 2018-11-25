@@ -54,4 +54,16 @@ public abstract class Creature {
             return false;
         }
     }
+    
+    public String info() {
+
+        Class cls = getClass();
+        return cls.getName() + " with " + hp + " HP and " + str + " STR";
+    }
+    
+    public String kind() {
+        
+        Class cls = getClass();
+        return cls.getName();
+    }
 }
